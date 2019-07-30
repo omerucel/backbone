@@ -2,6 +2,13 @@
 
 ```bash
 $ git clone git@github.com:omerucel/backbone.git new-project
+$
+```
+
+# Environment
+
+```bash
+$ cp .env.sample .env
 ```
 
 # Docker
