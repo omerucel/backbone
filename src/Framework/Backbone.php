@@ -77,7 +77,6 @@ class Backbone
     protected function loadConfigs()
     {
         $configs = include($this->basePath . '/app/configs/config.php');
-        $configs['base_path'] = $this->basePath;
         $configs['environment'] = getenv('PROJECT_ENV');
         $config = new Config($configs, true);
         $this->container->set(Config::class, $config);
