@@ -1,0 +1,9 @@
+api.welcome:
+  path: /
+  controller: Project\Controller\Api\IndexController
+
+api.not_found:
+  path: /{wildcard}
+  controller: Project\Controller\Api\NotFoundController
+  requirements:
+    wildcard: .*

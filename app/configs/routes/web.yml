@@ -1,0 +1,9 @@
+web.homepage:
+  path: /
+  controller: Project\Controller\Web\IndexController
+
+web.not_found:
+  path: /{wildcard}
+  controller: Project\Controller\Web\NotFoundController
+  requirements:
+    wildcard: .*

@@ -1,0 +1,36 @@
+{
+    "name": "omerucel/backbone",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ömer ÜCEL",
+            "email": "omerucel@gmail.com"
+        }
+    ],
+    "require": {
+        "psr/log": "1.0.2",
+        "php-di/php-di": "6.*",
+        "zendframework/zend-config": "3.*",
+        "symfony/dotenv": "4.*",
+        "symfony/config": "4.*",
+        "symfony/routing": "4.*",
+        "symfony/yaml": "4.*",
+        "symfony/http-foundation": "4.*",
+        "twig/twig": "2.*",
+        "illuminate/database": "5.8.14",
+        "illuminate/pagination": "5.8.14",
+        "doctrine/migrations": "1.8.1",
+        "swiftmailer/swiftmailer": "6.2.1",
+        "moneyphp/money": "3.2.1",
+        "ramsey/uuid": "3.8.0",
+        "google/recaptcha": "^1.2",
+        "symfony/translation":  "4.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Project\\": "src/Project",
+            "Framework\\": "src/Framework"
+        }
+    }
+}

@@ -1,0 +1,13 @@
+api:
+  resource: "routes/api.yml"
+  prefix: /api
+  trailing_slash_on_root: false
+
+admin:
+  resource: "routes/admin.yml"
+  prefix: /admin
+  trailing_slash_on_root: false
+
+web:
+  resource: "routes/web.yml"
+  prefix: /

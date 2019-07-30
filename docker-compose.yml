@@ -1,0 +1,40 @@
+version: '3'
+services:
+  nginx:
+    container_name: project_nginx
+    image: nginx:latest
+    environment:
+      VIRTUAL_HOST: project.local, *.project.local
+    networks:
+      - default
+      - nginx-proxy
+    ports:
+      - 80
+    depends_on:
+      - app
+    volumes:
+      - ./docker-files/vhost.conf:/etc/nginx/conf.d/default.conf
+      - ./:/data/project
+  app:
+    container_name: project_app
+    build: .
+    depends_on:
+      - mysql
+    volumes:
+      - ./docker-files/www.conf:/etc/php7/php-fpm.d/www.conf
+      - ./docker-files/php-development.ini:/etc/php7/conf.d/php-development.ini
+      - ./docker-files/xdebug.ini:/etc/php7/conf.d/xdebug.ini
+      - ./:/data/project
+  mysql:
+    container_name: project_mysql
+    image: mysql:5.6
+    ports:
+      - 3306
+    environment:
+      MYSQL_DATABASE: "project"
+      MYSQL_ROOT_PASSWORD: "password"
+
+networks:
+  nginx-proxy:
+    external:
+      name: nginx-proxy

@@ -1,0 +1,9 @@
+admin.dashboard:
+  path: /
+  controller: Project\Controller\Admin\IndexController
+
+admin.not_found:
+  path: /{wildcard}
+  controller: Project\Controller\Admin\NotFoundController
+  requirements:
+    wildcard: .*
