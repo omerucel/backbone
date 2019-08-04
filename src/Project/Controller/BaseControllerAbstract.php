@@ -109,6 +109,17 @@ abstract class BaseControllerAbstract
      * @param array $headers
      * @return RedirectResponse
      */
+    protected function redirectToRoute($routeName, $statusCode = 302, array $headers = [])
+    {
+        return $this->redirect($this->getRouter()->generate($routeName), $statusCode, $headers);
+    }
+
+    /**
+     * @param $url
+     * @param int $statusCode
+     * @param array $headers
+     * @return RedirectResponse
+     */
     protected function redirect($url, $statusCode = 302, array $headers = [])
     {
         return new RedirectResponse($url, $statusCode, $headers);

@@ -23,6 +23,9 @@ class TwigFactory
         $translator = $container->get(Translator::class);
         $loader = new FilesystemLoader($config->twig->templates_path);
         $twig = new Environment($loader, $config->twig->toArray());
+        $twig->addFunction(new TwigFunction('asset', function ($path, array $params = []) {
+            return $path;
+        }));
         $twig->addFunction(new TwigFunction('path', function ($name, array $params = []) use ($router) {
             return $router->generate($name, $params);
         }));

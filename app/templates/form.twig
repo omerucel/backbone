@@ -1,0 +1,21 @@
+{% macro show_messages(form) %}
+    {% for message in form.getMessages() %}
+        <div class="alert alert-outline alert-{{ message.level }}" role="alert">{{ message }}</div>
+    {% endfor %}
+{% endmacro %}
+
+{% macro input_class(input) %}
+    {% if input.message %}
+        {% if input.message.level == 'danger' %}is-invalid{% else %}is-valid{% endif %}
+    {% endif %}
+{% endmacro %}
+
+{% macro message_class(input) %}
+    {% if input.message %}
+        {% if input.message.level == 'danger' %}invalid-feedback{% else %}valid-feedback{% endif %}
+    {% endif %}
+{% endmacro %}
+
+{% macro csrf(form) %}
+    <input type="hidden" name="__csrf_token" value="{{ form.csrf.value }}" />
+{% endmacro %}

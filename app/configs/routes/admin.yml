@@ -2,6 +2,14 @@ admin.dashboard:
   path: /
   controller: Project\Controller\Admin\IndexController
 
+admin.login:
+  path: /login
+  controller: Project\Controller\Admin\LoginController
+
+admin.logout:
+  path: /logout
+  controller: Project\Controller\Admin\LogoutController
+
 admin.not_found:
   path: /{wildcard}
   controller: Project\Controller\Admin\NotFoundController
