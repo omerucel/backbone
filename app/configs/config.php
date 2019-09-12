@@ -32,10 +32,6 @@ return [
         'cache' => $basePath . '/var/cache/twig',
     ],
     'doctrine' => [
-        'schema_paths' => [$appPath . '/database/schema' => 'Project\Entity'],
-        'proxy_dir' => $basePath . '/var/cache/doctrine',
-        'proxy_namespace' => 'Project\Entity\Proxy',
-        'is_dev_mode' => false,
         'migration' => [
             'name' => 'Project',
             'namespace' => 'Project\Database\Migration',

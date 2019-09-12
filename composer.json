@@ -9,6 +9,8 @@
         }
     ],
     "require": {
+        "ext-pdo": "*",
+        "ext-json": "*",
         "psr/log": "1.0.2",
         "php-di/php-di": "6.*",
         "zendframework/zend-config": "3.*",
