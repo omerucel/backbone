@@ -2,9 +2,9 @@
 
 namespace Project\Controller;
 
-use Framework\Logger\LoggerHelper;
 use Illuminate\Database\Capsule\Manager;
 use Psr\Container\ContainerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,9 +32,9 @@ abstract class BaseControllerAbstract
     protected $config;
 
     /**
-     * @var LoggerHelper
+     * @var LoggerInterface
      */
-    protected $loggerHelper;
+    protected $logger;
 
     /**
      * @param ContainerInterface $container
@@ -44,7 +44,7 @@ abstract class BaseControllerAbstract
         $this->container = $container;
         $this->request = $this->container->get(Request::class);
         $this->config = $this->container->get(Config::class);
-        $this->loggerHelper = $this->container->get(LoggerHelper::class);
+        $this->logger = $this->container->get(LoggerInterface::class);
         $this->getCapsule(); // we need call it first to initialize, maybe we need search a better implementation
     }
 
@@ -99,7 +99,7 @@ abstract class BaseControllerAbstract
      */
     protected function handleException(\Throwable $throwable)
     {
-        $this->loggerHelper->getDefaultLogger()->error($throwable);
+        $this->logger->error($throwable);
         return (new Response('An error occurred!'))->setStatusCode(500);
     }
 

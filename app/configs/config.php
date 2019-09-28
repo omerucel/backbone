@@ -24,7 +24,7 @@ return [
     'logger' => [
         'default_name' => 'app',
         'path' => $basePath . '/var/log',
-        'level' => \Psr\Log\LogLevel::DEBUG
+        'level' => 100
     ],
     'twig' => [
         'auto_reload' => getenv('TWIG_AUTO_RELOAD') === 'true',

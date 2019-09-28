@@ -11,24 +11,24 @@
     "require": {
         "ext-pdo": "*",
         "ext-json": "*",
-        "psr/log": "1.0.2",
         "php-di/php-di": "6.*",
         "zendframework/zend-config": "3.*",
         "symfony/dotenv": "4.*",
         "symfony/config": "4.*",
         "symfony/routing": "4.*",
-        "respect/validation": "1.1.31",
+        "respect/validation": "1.*",
         "symfony/yaml": "4.*",
         "symfony/http-foundation": "4.*",
         "twig/twig": "2.*",
-        "illuminate/database": "5.8.14",
-        "illuminate/pagination": "5.8.14",
-        "doctrine/migrations": "1.8.1",
-        "swiftmailer/swiftmailer": "6.2.1",
-        "moneyphp/money": "3.2.1",
-        "ramsey/uuid": "3.8.0",
+        "illuminate/database": "5.*",
+        "illuminate/pagination": "5.*",
+        "doctrine/migrations": "1.*",
+        "swiftmailer/swiftmailer": "6.*",
+        "moneyphp/money": "3.*",
+        "ramsey/uuid": "3.*",
         "google/recaptcha": "^1.2",
-        "symfony/translation":  "4.*"
+        "symfony/translation":  "4.*",
+        "monolog/monolog": "^2.0"
     },
     "autoload": {
         "psr-4": {

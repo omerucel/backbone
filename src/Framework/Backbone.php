@@ -6,7 +6,7 @@ use DI\ContainerBuilder;
 use Doctrine\DBAL\Migrations\Configuration\Configuration;
 use Framework\Factory\CapsuleFactory;
 use Framework\Factory\Doctrine\Migration\ConfigurationFactory;
-use Framework\Factory\LoggerHelperFactory;
+use Framework\Factory\MonologFactory;
 use Framework\Factory\PdoFactory;
 use Framework\Factory\RequestFactory;
 use Framework\Factory\RouterFactory;
@@ -14,9 +14,9 @@ use Framework\Factory\SessionFactory;
 use Framework\Factory\SwiftMailerFactory;
 use Framework\Factory\TranslatorFactory;
 use Framework\Factory\TwigFactory;
-use Framework\Logger\LoggerHelper;
 use Illuminate\Database\Capsule\Manager;
 use Psr\Container\ContainerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -50,6 +50,7 @@ class Backbone
     /**
      * @param $basePath
      * @param array $serviceDefinitions
+     * @throws \Exception
      */
     public function __construct($basePath, $serviceDefinitions = [])
     {
@@ -89,7 +90,7 @@ class Backbone
     {
         return [
             \PDO::class => \DI\factory(PdoFactory::class),
-            LoggerHelper::class => \DI\factory(LoggerHelperFactory::class),
+            LoggerInterface::class => \DI\factory(MonologFactory::class),
             Session::class => \DI\factory(SessionFactory::class),
             Request::class => \DI\factory(RequestFactory::class),
             Environment::class => \DI\factory(TwigFactory::class),
