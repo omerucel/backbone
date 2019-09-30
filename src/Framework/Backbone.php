@@ -3,8 +3,10 @@
 namespace Framework;
 
 use DI\ContainerBuilder;
+use function DI\factory;
 use Doctrine\DBAL\Migrations\Configuration\Configuration;
 use Framework\Factory\CapsuleFactory;
+use Framework\Factory\ConfigFactory;
 use Framework\Factory\Doctrine\Migration\ConfigurationFactory;
 use Framework\Factory\MonologFactory;
 use Framework\Factory\PdoFactory;
@@ -28,21 +30,6 @@ use Zend\Config\Config;
 class Backbone
 {
     /**
-     * @var string
-     */
-    protected $basePath;
-
-    /**
-     * @var array
-     */
-    protected $serviceDefinitions;
-
-    /**
-     * @var Config
-     */
-    protected $config;
-
-    /**
      * @var ContainerInterface
      */
     protected $container;
@@ -54,33 +41,28 @@ class Backbone
      */
     public function __construct($basePath, $serviceDefinitions = [])
     {
-        $this->basePath = $basePath;
-        $this->serviceDefinitions = $serviceDefinitions;
-        $this->loadEnv();
-        $this->setupContainer();
-        $this->loadConfigs();
-    }
-
-    protected function loadEnv()
-    {
-        (new Dotenv())->load($this->basePath . '/.env');
+        $this->loadEnv($basePath);
+        $this->setupContainer($serviceDefinitions);
     }
 
     /**
-     * @throws \Exception
+     * @param $basePath
      */
-    protected function setupContainer()
+    protected function loadEnv($basePath)
     {
-        $definitions = array_replace($this->getDefaultDefinitions(), $this->serviceDefinitions);
-        $this->container = (new ContainerBuilder())->addDefinitions($definitions)->build();
+        $dotenv = new Dotenv();
+        $dotenv->load($basePath . '/.env');
+        $dotenv->populate(['PROJECT_BASE_PATH' => $basePath]);
     }
 
-    protected function loadConfigs()
+    /**
+     * @param array $serviceDefinitions
+     * @throws \Exception
+     */
+    protected function setupContainer($serviceDefinitions = [])
     {
-        $configs = include($this->basePath . '/app/configs/config.php');
-        $configs['environment'] = getenv('PROJECT_ENV');
-        $config = new Config($configs, true);
-        $this->container->set(Config::class, $config);
+        $definitions = array_replace($this->getDefaultDefinitions(), $serviceDefinitions);
+        $this->container = (new ContainerBuilder())->addDefinitions($definitions)->build();
     }
 
     /**
@@ -89,16 +71,17 @@ class Backbone
     protected function getDefaultDefinitions()
     {
         return [
-            \PDO::class => \DI\factory(PdoFactory::class),
-            LoggerInterface::class => \DI\factory(MonologFactory::class),
-            Session::class => \DI\factory(SessionFactory::class),
-            Request::class => \DI\factory(RequestFactory::class),
-            Environment::class => \DI\factory(TwigFactory::class),
-            Router::class => \DI\factory(RouterFactory::class),
-            Configuration::class => \DI\factory(ConfigurationFactory::class),
-            Manager::class => \DI\factory(CapsuleFactory::class),
-            \Swift_Mailer::class => \DI\factory(SwiftMailerFactory::class),
-            Translator::class => \DI\factory(TranslatorFactory::class)
+            Config::class => factory(ConfigFactory::class),
+            \PDO::class => factory(PdoFactory::class),
+            LoggerInterface::class => factory(MonologFactory::class),
+            Session::class => factory(SessionFactory::class),
+            Request::class => factory(RequestFactory::class),
+            Environment::class => factory(TwigFactory::class),
+            Router::class => factory(RouterFactory::class),
+            Configuration::class => factory(ConfigurationFactory::class),
+            Manager::class => factory(CapsuleFactory::class),
+            \Swift_Mailer::class => factory(SwiftMailerFactory::class),
+            Translator::class => factory(TranslatorFactory::class)
         ];
     }
 
@@ -115,6 +98,6 @@ class Backbone
      */
     public function getConfig(): Config
     {
-        return $this->config;
+        return $this->container->get(Config::class);
     }
 }
