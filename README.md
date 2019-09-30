@@ -9,6 +9,7 @@ $
 
 ```bash
 $ cp .env.sample .env
+$ cp docker-compose.yml.sample docker-compose.yml
 ```
 
 # Docker
@@ -22,6 +23,5 @@ $ docker-compose up -d
 # Database Migration
 
 ```bash
-$ docker exec -it project_app /bin/bash
-[root@project_app:/data/project] $ php bin/console migrations:migrate
+$ docker exec -it project_app php bin/console.php migrations:migrate
 ```
