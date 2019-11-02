@@ -11,6 +11,7 @@ date_default_timezone_set(getenv('PROJECT_TIMEZONE'));
 
 return [
     'basePath' => $basePath,
+    'asset_base_path' => getenv('ASSET_BASE_PATH'),
     'routes' => $appPath . '/configs/routes.yml',
     'capsul' => [
         'driver' => getenv('CAPSUL_DRIVER'),
@@ -24,7 +25,7 @@ return [
     'logger' => [
         'default_name' => 'app',
         'path' => $basePath . '/var/log',
-        'level' => 100
+        'level' => intval(getenv('LOGGER_LEVEL'))
     ],
     'twig' => [
         'auto_reload' => getenv('TWIG_AUTO_RELOAD') === 'true',
