@@ -2,8 +2,8 @@
 
 namespace Framework;
 
-use Doctrine\DBAL\Migrations\Configuration\Configuration;
-use Doctrine\DBAL\Migrations\Tools\Console\Helper\ConfigurationHelper;
+use Doctrine\Migrations\Configuration\Configuration;
+use Doctrine\Migrations\Tools\Console\Helper\ConfigurationHelper;
 use Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Application;
@@ -42,7 +42,7 @@ class Console extends Application
             $configuration
         ));
         \Doctrine\DBAL\Tools\Console\ConsoleRunner::addCommands($this);
-        \Doctrine\DBAL\Migrations\Tools\Console\ConsoleRunner::addCommands($this);
+        \Doctrine\Migrations\Tools\Console\ConsoleRunner::addCommands($this);
     }
 
     public function getContainer()

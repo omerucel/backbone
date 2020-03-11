@@ -137,6 +137,7 @@ abstract class BaseControllerAbstract
      */
     protected function render($template, array $context = [], $statusCode = 200, array $headers = [])
     {
+        $context['current_route'] = $this->container->get('current_route');
         return new Response($this->getTwig()->render($template, $context), $statusCode, $headers);
     }
 
@@ -150,6 +151,18 @@ abstract class BaseControllerAbstract
     {
         $headers['content-type'] = 'application/json; charset=utf-8;';
         return new Response(json_encode($data), $statusCode, $headers);
+    }
+
+    /**
+     * @param $content
+     * @param int $statusCode
+     * @param array $headers
+     * @return Response
+     */
+    protected function toPlain($content = '', $statusCode = 200, array $headers = [])
+    {
+        $headers['content-type'] = 'text/plain; charset=utf-8;';
+        return new Response($content, $statusCode, $headers);
     }
 
     /**

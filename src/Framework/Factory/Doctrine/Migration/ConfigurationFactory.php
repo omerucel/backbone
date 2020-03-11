@@ -3,7 +3,7 @@
 namespace Framework\Factory\Doctrine\Migration;
 
 use Doctrine\DBAL\DriverManager;
-use Doctrine\DBAL\Migrations\Configuration\Configuration;
+use Doctrine\Migrations\Configuration\Configuration;
 use Psr\Container\ContainerInterface;
 use Zend\Config\Config;
 

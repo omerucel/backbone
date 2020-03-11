@@ -4,7 +4,7 @@ namespace Framework;
 
 use DI\ContainerBuilder;
 use function DI\factory;
-use Doctrine\DBAL\Migrations\Configuration\Configuration;
+use Doctrine\Migrations\Configuration\Configuration;
 use Framework\Factory\CapsuleFactory;
 use Framework\Factory\ConfigFactory;
 use Framework\Factory\Doctrine\Migration\ConfigurationFactory;
@@ -50,7 +50,7 @@ class Backbone
      */
     protected function loadEnv($basePath)
     {
-        $dotenv = new Dotenv();
+        $dotenv = new Dotenv(true);
         $dotenv->load($basePath . '/.env');
         $dotenv->populate(['PROJECT_BASE_PATH' => $basePath]);
     }

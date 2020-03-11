@@ -11,6 +11,7 @@ date_default_timezone_set(getenv('PROJECT_TIMEZONE'));
 
 return [
     'basePath' => $basePath,
+    'project_url' => getenv('PROJECT_URL'),
     'asset_base_path' => getenv('ASSET_BASE_PATH'),
     'routes' => $appPath . '/configs/routes.yml',
     'capsul' => [

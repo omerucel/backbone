@@ -3,13 +3,8 @@ services:
   nginx:
     container_name: project_nginx
     image: nginx:latest
-    environment:
-      VIRTUAL_HOST: project.local, *.project.local
-    networks:
-      - default
-      - nginx-proxy
     ports:
-      - 80
+      - 8080:80
     depends_on:
       - app
     volumes:
@@ -29,12 +24,7 @@ services:
     container_name: project_mysql
     image: mysql:5.6
     ports:
-      - 3306
+      - 3306:3306
     environment:
       MYSQL_DATABASE: "project"
       MYSQL_ROOT_PASSWORD: "password"
-
-networks:
-  nginx-proxy:
-    external:
-      name: nginx-proxy

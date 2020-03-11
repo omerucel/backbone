@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^app - [F]
+RewriteRule ^bin - [F]
+RewriteRule ^docker-files - [F]
+RewriteRule ^src - [F]
+RewriteRule ^var - [F]
+RewriteRule ^vendor - [F]
+RewriteRule (^\.|/\.) - [F]
+RewriteRule ^composer.json - [F]
+RewriteRule ^composer.lock - [F]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>
