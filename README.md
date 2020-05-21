@@ -15,8 +15,6 @@ $ cp docker-compose.yml.sample docker-compose.yml
 # Docker
 
 ```bash
-$ docker network create nginx-proxy
-$ docker run -d --network=nginx-proxy -p 80:80 -v /var/run/docker.sock:/tmp/docker.sock:ro jwilder/nginx-proxy
 $ docker-compose up -d
 ```
 
